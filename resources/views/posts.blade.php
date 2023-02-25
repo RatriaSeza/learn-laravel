@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
+    <h1>{{ $title }}</h1>
     @foreach ($posts as $post)
         <article class="mb-3 border-bottom pb-4 ">
             <h2>
@@ -8,10 +9,12 @@
             </h2>
             <p>
                 By:
-                <a class="text-secondary text-decoration-none" href="/authors/{{ $post->author->username }}">{{ $post->author->name }}
+                <a class="text-secondary text-decoration-none"
+                    href="/authors/{{ $post->author->username }}">{{ $post->author->name }}
                 </a>
                 in
-                <a class="text-secondary text-decoration-none" href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}
+                <a class="text-secondary text-decoration-none"
+                    href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}
                     Category
                 </a>
             </p>
