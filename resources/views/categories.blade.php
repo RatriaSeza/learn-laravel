@@ -3,13 +3,20 @@
 @section('container')
     <h1 class="mb-5">Post Categories</h1>
 
-    <ul>
-        @foreach ($categories as $category)
-            <li>
-                <h2>
-                    <a href="/categories/{{ $category->slug }}" class="text-secondary">{{ $category->name }}</a>
-                </h2>
-            </li>
-        @endforeach
-    </ul>
+    <div class="container">
+        <div class="row">
+            @foreach ($categories as $category)
+                <div class="col-md-4">
+                    <a href="/categories/{{ $category->slug }}">
+                        <div class="card text-bg-dark">
+                            <img src="https://source.unsplash.com/500x500?{{ $category->name }}" class="card-img" alt="{{ $category->name }}">
+                            <div class="card-img-overlay d-flex align-items-center justify-content-center" style="background-color: rgba(0,0,0,0.7)">
+                                <h5 class="card-title fs-4">{{ $category->name }}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    </div>
 @endsection
