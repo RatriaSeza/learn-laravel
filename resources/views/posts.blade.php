@@ -72,8 +72,8 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
         </div>
     @else
         <p class="text-cent fs-4">No post found.</p>
