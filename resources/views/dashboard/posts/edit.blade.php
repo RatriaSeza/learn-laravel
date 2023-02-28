@@ -7,13 +7,13 @@
 
     <a class="btn btn-dark d-block my-3 col-lg-1" href="/dashboard/posts" role="button">Back</a>
     <div class="col-lg-8 pb-5">
-        <form method="post" action="/dashboard/posts/{{ $post->slug }}">
+        <form method="post" action="/dashboard/posts/{{ $post->slug }}" enctype="multipart/form-data">
             @method('put')
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
-                    value="{{ old('title', $post->title) }}" required autofocus>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                    name="title" value="{{ old('title', $post->title) }}" required autofocus>
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -43,6 +43,22 @@
                 </select>
             </div>
             <div class="mb-3">
+                <label for="image" class="form-label">Post Image</label>
+                <input type="hidden" name="oldImage" value="{{ $post->image }}">
+                @if ($post->image)
+                    <img src="{{ asset('storage/' . $post->image) }}" class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                @else
+                    <img class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                @endif
+                <input class="form-control @error('image') is-invalid @enderror"" type="file" id="image"
+                    name="image" onchange="previewImage()">
+                @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
                 @error('body')
                     <p class="text-danger">{{ $message }}</p>
@@ -66,6 +82,14 @@
 
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault();
-        })
+        });
+
+        function previewImage() {
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+            const blob = URL.createObjectURL(image.files[0]);
+
+            imgPreview.src = blob;
+        }
     </script>
 @endsection

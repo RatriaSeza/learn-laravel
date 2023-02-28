@@ -11,8 +11,8 @@
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
-                    value="{{ old('title') }}" required autofocus>
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
+                    name="title" value="{{ old('title') }}" required autofocus>
                 @error('title')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -42,8 +42,10 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label for="image" class="form-label">Post Image</label>
-                <input class="form-control @error('image') is-invalid @enderror"" type="file" id="image" name="image">
+                <label for="image" class="form-label">Post Image</label><br>
+                <img class="img-preview img-fluid mb-3 col-sm-5 d-block">
+                <input class="form-control @error('image') is-invalid @enderror"" type="file" id="image"
+                    name="image" onchange="previewImage()">
                 @error('image')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -75,5 +77,13 @@
         document.addEventListener('trix-file-accept', function(e) {
             e.preventDefault();
         })
+
+        function previewImage() {
+            const image = document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+            const blob = URL.createObjectURL(image.files[0]);
+
+            imgPreview.src = blob;
+        }
     </script>
 @endsection
