@@ -5,8 +5,9 @@
         <h1 class="h2">Create New Post</h1>
     </div>
 
+    <a class="btn btn-dark d-block my-3 col-lg-1" href="/dashboard/posts" role="button">Back</a>
     <div class="col-lg-8 pb-5">
-        <form method="post" action="/dashboard/posts">
+        <form method="post" action="/dashboard/posts" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -39,6 +40,15 @@
                         @endif
                     @endforeach
                 </select>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Post Image</label>
+                <input class="form-control @error('image') is-invalid @enderror"" type="file" id="image" name="image">
+                @error('image')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="body" class="form-label">Body</label>

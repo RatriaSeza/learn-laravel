@@ -5,6 +5,7 @@
         <h1 class="h2">Edit Post</h1>
     </div>
 
+    <a class="btn btn-dark d-block my-3 col-lg-1" href="/dashboard/posts" role="button">Back</a>
     <div class="col-lg-8 pb-5">
         <form method="post" action="/dashboard/posts/{{ $post->slug }}">
             @method('put')
